@@ -9,24 +9,24 @@ var getElementsByClassName = function(className) {
   let elements = [];
 
   // checks if element has a class list and if element has children
-  function hasClassOrChild(element) {
-    if(element.classList){
+  function getClass(node) {
+    if(node.classList){
       // case: has multiple classes
-      if (element.classList.contains(className)) {
-        elements.push(element);
+      if (node.classList.contains(className)) {
+        elements.push(node);
       }
     }
 
-    if(element.hasChildNodes()) {
-      let children = element.childNodes;
+    if(node.hasChildNodes()) {
+      let children = node.childNodes;
       for(const child of children) {
-        hasClassOrChild(child);
+        getClass(child);
       }
     }
   }
 
   let root = document.body;
-  hasClassOrChild(root);
+  getClass(root);
 
   return elements;
 };
